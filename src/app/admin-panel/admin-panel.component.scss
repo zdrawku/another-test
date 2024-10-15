@@ -27,3 +27,15 @@
   flex-grow: 1;
   flex-basis: 0;
 }
+.select {
+  --ig-size: var(--ig-size-small);
+  height: max-content;
+  min-width: min-content;
+}
+.radio-group {
+  width: max-content;
+  height: max-content;
+}
+.radio {
+  padding: 8px;
+}

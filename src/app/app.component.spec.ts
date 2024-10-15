@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { IgxAvatarComponent, IgxIconButtonDirective, IgxRippleDirective, IgxToggleDirective, IgxToggleActionDirective, IgxOverlayOutletDirective, IgxIconComponent, IGX_DIALOG_DIRECTIVES, IgxButtonDirective } from '@infragistics/igniteui-angular';
+import { IgxAvatarComponent, IgxIconButtonDirective, IgxRippleDirective, IgxToggleDirective, IgxToggleActionDirective, IgxOverlayOutletDirective, IgxIconComponent, IGX_DIALOG_DIRECTIVES, IgxButtonDirective } from 'igniteui-angular';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
