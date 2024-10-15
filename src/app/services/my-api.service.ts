@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
 import { ToyModel } from '../models/my-api/toy-model';
-import { CategoryModel } from '../models/my-api/category-model';
+import { CategoryModelMyAPI } from '../models/my-api/category-model-my-api';
 import { ErrorHandlerService } from './error-handler.service';
 
 const API_ENDPOINT = 'https://toystoreapi.appbuilder.dev';
@@ -15,9 +15,9 @@ export class MyAPIService {
     private http: HttpClient
   ) { }
 
-  public getCategoryModelList(): Observable<CategoryModel[]> {
-    return this.http.get<CategoryModel[]>(`${API_ENDPOINT}/api/Toys/categories`)
-      .pipe(catchError(ErrorHandlerService.handleError<CategoryModel[]>('getCategoryModelList', [])));
+  public getCategoryModelList(): Observable<CategoryModelMyAPI[]> {
+    return this.http.get<CategoryModelMyAPI[]>(`${API_ENDPOINT}/api/Toys/categories`)
+      .pipe(catchError(ErrorHandlerService.handleError<CategoryModelMyAPI[]>('getCategoryModelList', [])));
   }
 
   public getToyModelList(categoryId: number): Observable<ToyModel[]> {
@@ -52,6 +52,15 @@ export class MyAPIService {
       .pipe(catchError(ErrorHandlerService.handleError<ToyModel | undefined>('postToyModel', undefined)));
   }
 
+  public putToyModel(data: any): Observable<ToyModel | undefined> {
+    if (!data) {
+      return of(undefined);
+    }
+    const body = data;
+    return this.http.put<ToyModel | undefined>(`${API_ENDPOINT}/api/Toys/updateToy`, body)
+      .pipe(catchError(ErrorHandlerService.handleError<ToyModel | undefined>('putToyModel', undefined)));
+  }
+
   public deleteToyModel(id: number): Observable<ToyModel | undefined> {
     const params = new HttpParams()
       .append('id', id);
@@ -60,15 +69,6 @@ export class MyAPIService {
     };
     return this.http.delete<ToyModel | undefined>(`${API_ENDPOINT}/api/Toys/deleteToyById`, options)
       .pipe(catchError(ErrorHandlerService.handleError<ToyModel | undefined>('deleteToyModel', undefined)));
-  }
-
-  public putToyModel(data: any): Observable<ToyModel | undefined> {
-    if (!data) {
-      return of(undefined);
-    }
-    const body = data;
-    return this.http.put<ToyModel | undefined>(`${API_ENDPOINT}/api/Toys/updateToy`, body)
-      .pipe(catchError(ErrorHandlerService.handleError<ToyModel | undefined>('putToyModel', undefined)));
   }
 
   public getToyModelList2(name: string): Observable<ToyModel[]> {
